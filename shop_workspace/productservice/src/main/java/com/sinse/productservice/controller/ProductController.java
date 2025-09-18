@@ -1,6 +1,10 @@
 package com.sinse.productservice.controller;
 
 import com.sinse.productservice.controller.dto.ProductDTO;
+import com.sinse.productservice.domain.Product;
+import com.sinse.productservice.domain.SubCategory;
+import com.sinse.productservice.model.product.ProductService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +17,10 @@ import java.util.Map;
 @Slf4j
 //Roy폴딩
 @RestController
+@RequiredArgsConstructor
 public class ProductController {
+
+    private final ProductService productService;
 
     @GetMapping("/products")
     public ResponseEntity<?> products() {
@@ -33,6 +40,20 @@ public class ProductController {
         log.debug("가격"+productDTO.getPrice());
         log.debug("할인가"+productDTO.getDiscount());
         log.debug("상세설명"+productDTO.getDetail());
+
+        //서비스에게 !!
+        Product product = new Product();
+
+        product.setProductName(productDTO.getProductName());
+        product.setBrand(productDTO.getBrand());
+        product.setPrice(productDTO.getPrice());
+        product.setDiscount(productDTO.getDiscount());
+        product.setDetail(productDTO.getDetail());
+        SubCategory subCategory = new SubCategory();
+        subCategory.setSubCategoryId(productDTO.getSubCategoryDTO().getSubCategoryId());
+        product.setSubCategory(subCategory);
+
+        productService.save(product, files);
 
         return ResponseEntity.ok(Map.of("result", "업로드 성공"));
     }

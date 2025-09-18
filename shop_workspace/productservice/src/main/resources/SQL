@@ -1,9 +1,15 @@
-use restaurant;
+use productdb;
 
 create  table topcategory(
     topcategory_id  int primary key auto_increment
   , topname  varchar(20)
 );
+insert into topcategory(topname) values('한식');
+insert into topcategory(topname) values('일식');
+insert into topcategory(topname) values('중식');
+insert into topcategory(topname) values('양식');
+
+
 create  table subcategory(
     subcategory_id  int primary key auto_increment
   , subname  varchar(20)
@@ -11,6 +17,28 @@ create  table subcategory(
   , constraint fk_topcategory_subcategory foreign key (topcategory_id)
     references topcategory(topcategory_id)
 );
+
+insert into subcategory(subname, topcategory_id) values('김치찌게',1);
+insert into subcategory(subname, topcategory_id) values('굴전',1);
+insert into subcategory(subname, topcategory_id) values('비빔밥',1);
+insert into subcategory(subname, topcategory_id) values('갈비찜',1);
+
+insert into subcategory(subname, topcategory_id) values('초밥',2);
+insert into subcategory(subname, topcategory_id) values('소바',2);
+insert into subcategory(subname, topcategory_id) values('가라아게',2);
+insert into subcategory(subname, topcategory_id) values('라멘',2);
+
+insert into subcategory(subname, topcategory_id) values('짜장면',3);
+insert into subcategory(subname, topcategory_id) values('짬뽕',3);
+insert into subcategory(subname, topcategory_id) values('탕수육',3);
+insert into subcategory(subname, topcategory_id) values('군만두',3);
+
+insert into subcategory(subname, topcategory_id) values('파스타',4);
+insert into subcategory(subname, topcategory_id) values('피자',4);
+insert into subcategory(subname, topcategory_id) values('스테이크',4);
+insert into subcategory(subname, topcategory_id) values('바베큐',4);
+
+
 create table product(
    product_id int primary key auto_increment
   , product_name varchar(25)
@@ -25,10 +53,10 @@ create table product(
 
 create  table  product_file(
   product_file_id  int  primary key auto_increment
-  , filename varchar(25)
+  , filename varchar(50)
   , original_name  varchar(25)
   , content_type varchar(20)
-  , filepath varchar(50)
+  , filepath varchar(150)
   , filesize  int default 0
   , product_id  int
   , constraint fk_product_product_file  foreign key(product_id)
