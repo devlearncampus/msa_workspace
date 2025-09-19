@@ -3,6 +3,8 @@ package com.sinse.productservice.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "product")
@@ -31,7 +33,12 @@ public class Product {
     @Column(name = "detail")
     private String detail;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    //mybatis의 경우 association 대상임
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subcategory_id")
     private SubCategory subCategory;
+
+    //mybatis 의 경우 collection으로 수집함
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<ProductFile> productFileList;
 }

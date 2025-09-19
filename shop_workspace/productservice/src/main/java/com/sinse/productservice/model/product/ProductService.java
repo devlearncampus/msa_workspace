@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface ProductService {
     public void save(Product product, List<MultipartFile> files);
+    public List<Product> selectAll();
+    public Product select(int productId);
+    public void update(Product product, List<MultipartFile> files);
+    public void delete(int productId);
 }

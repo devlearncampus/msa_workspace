@@ -13,7 +13,7 @@ public class TopCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "topcategory_id")
-    private int topcategoryId;
+    private int topCategoryId;
 
     @Column(name = "topname")
     private String topName;

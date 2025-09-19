@@ -50,6 +50,26 @@ public class ProductServiceImpl implements ProductService {
             jpaProductFileRepository.save(productFile);
         });
     }
+
+    @Override
+    public List<Product> selectAll() {
+        return jpaProductRepository.findAll();
+    }
+
+    @Override
+    public Product select(int productId) {
+        return jpaProductRepository.findById(productId).orElse(null);
+    }
+
+    @Override
+    public void update(Product product, List<MultipartFile> files) {
+
+    }
+
+    @Override
+    public void delete(int productId) {
+
+    }
 }
 
 
